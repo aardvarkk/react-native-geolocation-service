@@ -139,10 +139,12 @@ public class FusedLocationProvider implements LocationProvider {
 
   @Override
   public void requestLocationUpdates(LocationOptions locationOptions, final LocationChangeListener locationChangeListener) {
+    Log.i("RNFusedLocation", "requestLocationUpdates", locationOptions.toString());
     this.isSingleUpdate = false;
     this.locationChangeListener = locationChangeListener;
     this.locationOptions = locationOptions;
     this.locationRequest = buildLocationRequest(locationOptions);
+    Log.i("RNFusedLocation", this.locationRequest.toString());
     checkLocationSettings();
   }
 
@@ -172,12 +174,15 @@ public class FusedLocationProvider implements LocationProvider {
       .addOnSuccessListener(new OnSuccessListener<LocationSettingsResponse>() {
         @Override
         public void onSuccess(LocationSettingsResponse locationSettingsResponse) {
+          Log.i("RNFusedLocation", "checkLocationSettings success");
           startLocationUpdates();
         }
       })
       .addOnFailureListener(new OnFailureListener() {
         @Override
         public void onFailure(@NonNull Exception e) {
+          Log.i("RNFusedLocation", "checkLocationSettings failure");
+
           ApiException exception = (ApiException) e;
 
           switch (exception.getStatusCode()) {
