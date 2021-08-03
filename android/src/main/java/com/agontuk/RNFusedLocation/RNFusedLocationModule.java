@@ -43,11 +43,16 @@ public class RNFusedLocationModule extends ReactContextBaseJavaModule implements
 
   @Override
   public void onActivityResult(Activity activity, int requestCode, int resultCode, Intent data) {
+    Log.i(TAG, "onActivityResult");
+
     if (continuousLocationProvider != null &&
       continuousLocationProvider.onActivityResult(requestCode, resultCode)
     ) {
+      Log.i(TAG, "continuousLocationProvider");
       return;
     }
+
+    Log.i(TAG, "singleLocationProviders");
 
     Collection<LocationProvider> providers = singleLocationProviders.values();
 
@@ -98,6 +103,8 @@ public class RNFusedLocationModule extends ReactContextBaseJavaModule implements
   public void startObserving(ReadableMap options) {
     ReactApplicationContext context = getContext();
 
+    Log.i(TAG, "startObserving");
+
     if (!LocationUtils.hasLocationPermission(context)) {
       emitEvent(
         "geolocationError",
@@ -110,6 +117,7 @@ public class RNFusedLocationModule extends ReactContextBaseJavaModule implements
 
     if (continuousLocationProvider == null) {
       continuousLocationProvider = createLocationProvider(locationOptions.isForceLocationManager());
+      Log.i(TAG, "created continuousLocationProvider");
     }
 
     continuousLocationProvider.requestLocationUpdates(locationOptions, new LocationChangeListener() {
@@ -123,6 +131,8 @@ public class RNFusedLocationModule extends ReactContextBaseJavaModule implements
         emitEvent("geolocationError", LocationUtils.buildError(error, message));
       }
     });
+
+    Log.i(TAG, "requestLocationUpdates");
   }
 
   @ReactMethod
