@@ -43,6 +43,7 @@ public class FusedLocationProvider implements LocationProvider {
   private final LocationCallback locationCallback = new LocationCallback() {
     @Override
     public void onLocationResult(LocationResult locationResult) {
+      Log.i("RNFusedLocation", "onLocationResult");
       locationChangeListener.onLocationChange(locationResult.getLastLocation());
 
       if (isSingleUpdate) {
@@ -53,6 +54,7 @@ public class FusedLocationProvider implements LocationProvider {
 
     @Override
     public void onLocationAvailability(LocationAvailability locationAvailability) {
+      Log.i("RNFusedLocation", "onLocationAvailability");
       if (!locationAvailability.isLocationAvailable() &&
         !LocationUtils.isLocationEnabled(context)
       ) {
