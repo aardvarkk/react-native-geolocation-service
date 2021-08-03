@@ -241,7 +241,7 @@ public class FusedLocationProvider implements LocationProvider {
 
   @SuppressLint("MissingPermission")
   private void startLocationUpdates() {
-    Log.i(TAG, "startLocationUpdates");
+    Log.i("RNFusedLocation", "startLocationUpdates");
 
     fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper());
 
