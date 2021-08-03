@@ -114,6 +114,7 @@ public class RNFusedLocationModule extends ReactContextBaseJavaModule implements
     }
 
     LocationOptions locationOptions = LocationOptions.fromReadableMap(options);
+    Log.i(TAG, options.toString());
 
     if (continuousLocationProvider == null) {
       continuousLocationProvider = createLocationProvider(locationOptions.isForceLocationManager());
@@ -148,9 +149,11 @@ public class RNFusedLocationModule extends ReactContextBaseJavaModule implements
     boolean playServicesAvailable = LocationUtils.isGooglePlayServicesAvailable(context);
 
     if (forceLocationManager || !playServicesAvailable) {
+      Log.i(TAG, "force location or no play services");
       return new LocationManagerProvider(context);
     }
 
+    Log.i(TAG, "fused location provider");
     return new FusedLocationProvider(context);
   }
 
