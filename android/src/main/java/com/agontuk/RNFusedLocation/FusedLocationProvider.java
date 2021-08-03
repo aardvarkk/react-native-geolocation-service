@@ -139,7 +139,8 @@ public class FusedLocationProvider implements LocationProvider {
 
   @Override
   public void requestLocationUpdates(LocationOptions locationOptions, final LocationChangeListener locationChangeListener) {
-    Log.i("RNFusedLocation", "requestLocationUpdates", locationOptions.toString());
+    Log.i("RNFusedLocation", "requestLocationUpdates");
+    Log.i("RNFusedLocation", locationOptions.toString());
     this.isSingleUpdate = false;
     this.locationChangeListener = locationChangeListener;
     this.locationOptions = locationOptions;
