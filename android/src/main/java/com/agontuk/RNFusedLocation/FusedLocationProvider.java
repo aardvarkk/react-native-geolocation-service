@@ -55,6 +55,8 @@ public class FusedLocationProvider implements LocationProvider {
     @Override
     public void onLocationAvailability(LocationAvailability locationAvailability) {
       Log.i("RNFusedLocation", "onLocationAvailability");
+      Log.i("RNFusedLocation", locationAvailability.toString());
+      Log.i("RNFusedLocation", LocationUtils.isLocationEnabled(context).toString());
       if (!locationAvailability.isLocationAvailable() &&
         !LocationUtils.isLocationEnabled(context)
       ) {
